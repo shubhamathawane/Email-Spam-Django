@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="pb-5" style="background-color: #fdf8d7">
+      <div class="container">
+        <div class="bg-body d-flex justify-content-around mt-3 nav rounded">
+          <div class="">
+            <h3>Email & SMS Spam Detector</h3>
+          </div>
+        </div>
+
+        <div
+          class="d-flex justify-content-around mt-5 p-3"
+          style="border-style: dotted"
+        >
+          <div class="">
+            <form method="post" action="{% url 'spam_view' %}">
+              {% csrf_token %} {{ form.as_p }}
+              <button class="btn btn-outline-secondary" type="submit">
+                Submit
+              </button>
+            </form>
+          </div>
+          {% if res %}
+          <div class="align-items-center w-25 border border-danger d-flex form justify-content-center p-2 rounded">
+            <p class="fw-bold text-danger">It's Spam</p>
+          </div>
+          {% else %}
+          <div class="align-items-center w-25 border d-flex border-sucess form justify-content-center p-2 rounded">
+            <p class="fw-bold text-success">Not Spam</p>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
